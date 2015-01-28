@@ -7,16 +7,19 @@ inputDirectory = "C:/transcripts/"
 #The formatted .txt files from each of the lessons will be saved in the directory you specify below:
 outputDirectory = "C:/parsedTranscripts/"
 
-def parseTranscript(inputLines, outputFile, length = 105):
-    data = [""] + [line.decode("utf8").strip() for line in inputLines]
+def parseTranscript(inputLines, outputFile, leftJustify = False, length = 105):
+    if leftJustify:
+        data = [""] + [line.decode("utf8").strip() for line in inputLines]
+    else:
+        data = [""] + [line.decode("utf8") for line in inputLines]
+        
     lines = [""]
     
     for i in range(len(data)):
         if i % 4 == 3:
             line = data[i]
-            if len(line) > 0:
-                if line[0] == ">":
-                    lines[-1] += "\n"
+            if line.find(">>") > -1:
+                lines[-1] = lines[-1] + "\n"
             lines.append(line + " ")
             
     text = " ".join(lines)
@@ -24,27 +27,31 @@ def parseTranscript(inputLines, outputFile, length = 105):
     
     output = []
     
-    done = False
-    
-    while not done:
-        line = ""
-        
-        while len(line) < length:
-            line += words.pop(0) + " "
-            if len(words) == 0:
-                break
+    if leftJustify:
+        done = False
+        while not done:
+            line = ""
             
-        output.append(line + "\n")
+            while len(line) < length:
+                line += words.pop(0) + " "
+                if len(words) == 0:
+                    break
+                
+            output.append(line + "\n")
+                
+            if len(" ".join(words)) < length:
+                done = True
+                output.append(" ".join(words))
+                
+        for line in output:
+            if len(line) > 0:
+                if line[0] == " ":
+                    line = line[1:]
+            outputFile.write(line.encode("utf-8"))
             
-        if len(" ".join(words)) < length:
-            done = True
-            output.append(" ".join(words))
-            
-    for line in output:
-        if len(line) > 0:
-            if line[0] == " ":
-                line = line[1:]
-        outputFile.write(line.encode("utf-8"))
+    else:
+        for line in lines:
+            outputFile.write(line.encode("utf-8"))
         
 
 
