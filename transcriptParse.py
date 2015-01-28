@@ -7,7 +7,7 @@ inputDirectory = "C:/transcripts/"
 #The formatted .txt files from each of the lessons will be saved in the directory you specify below:
 outputDirectory = "C:/parsedTranscripts/"
 
-def parseTranscript(inputLines, outputFile, leftJustify = False, length = 105):
+def parseTranscript(inputLines, outputFile, justify = True, length = 105):
     if leftJustify:
         data = [""] + [line.decode("utf8").strip() for line in inputLines]
     else:
@@ -23,35 +23,32 @@ def parseTranscript(inputLines, outputFile, leftJustify = False, length = 105):
             lines.append(line + " ")
             
     text = " ".join(lines)
-    words = text.split(" ")
     
+    if justify:
+        lines = leftJustify(text, length)
+        
+    for line in lines:
+        outputFile.write(line.encode("utf-8"))     
+
+def leftJustify(text, lineLength):
+    done = False
     output = []
-    
-    if leftJustify:
-        done = False
-        while not done:
-            line = ""
+    words = text.split(" ")
+    while not done:
+        line = ""
+        
+        while len(line) < lineLength:
+            line += words.pop(0) + " "
+            if len(words) == 0:
+                break
             
-            while len(line) < length:
-                line += words.pop(0) + " "
-                if len(words) == 0:
-                    break
-                
-            output.append(line + "\n")
-                
-            if len(" ".join(words)) < length:
-                done = True
-                output.append(" ".join(words))
-                
-        for line in output:
-            if len(line) > 0:
-                if line[0] == " ":
-                    line = line[1:]
-            outputFile.write(line.encode("utf-8"))
+        output.append(line + "\n")
             
-    else:
-        for line in lines:
-            outputFile.write(line.encode("utf-8"))
+        if len(" ".join(words)) < lineLength:
+            done = True
+            output.append(" ".join(words))
+
+    return output
         
 
 
