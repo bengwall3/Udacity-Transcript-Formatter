@@ -1,5 +1,11 @@
 import os
-from zipfile import ZipFile        
+from zipfile import ZipFile
+
+#Place all .zip files from Udacity in the directory you specify below:
+inputDirectory = "C:/transcripts/"
+
+#The formatted .txt files from each of the lessons will be saved in the directory you specify below:
+outputDirectory = "C:/parsedTranscripts/"
 
 def parseTranscript(inputLines, outputFile):
     lines = [""] + [line.decode("utf-8") for line in inputLines]
@@ -13,21 +19,19 @@ def parseTranscript(inputLines, outputFile):
                 writeThese[-1] += "\n"
             writeThese.append(line + " ")
             
-    foo = [outputFile.write(line) for line in writeThese]
+    for line in writeThese:
+        outputFile.write(line)
 
 def checkOrMake(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
     
-inputDirectory = "C:/transcripts/"
 lessonZips = []
 
 for root, dirs, files in os.walk(inputDirectory):
-    for file in files:
-        if file.endswith(".zip"):
-            lessonZips.append(file[:-4])
-            
-outputDirectory = "C:/parsedTranscripts/"
+    for f in files:
+        if f.endswith(".zip"):
+            lessonZips.append(f[:-4])
 
 checkOrMake(outputDirectory)
 
