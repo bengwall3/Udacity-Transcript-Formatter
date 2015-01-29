@@ -14,9 +14,9 @@ def parseTranscript(inputLines, outputFile, justify = True, length = 105):
         data = [""] + [line.decode("utf8") for line in inputLines]
         
     lines = [""]
-    
+
     for i in range(len(data)):
-        if i % 4 == 3:
+        if (i % 4 == 3 and data[1] == "1") or (i % 3 == 2 and data[1] != "1"):
             line = data[i]
             if line.find(">>") > -1:
                 lines[-1] = lines[-1] + "\n"
