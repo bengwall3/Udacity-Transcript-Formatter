@@ -2,10 +2,10 @@ import os
 from zipfile import ZipFile
 
 #Place all .zip files from Udacity in the directory you specify below:
-inputDirectory = "transcripts/"
+inputDirectory = "C:/transcripts/"
 
 #The formatted .txt files from each of the lessons will be saved in the directory you specify below:
-outputDirectory = "parsedTranscripts/"
+outputDirectory = "C:/parsedTranscripts/"
 
 def parseTranscript(inputLines, outputFile, justify = True, length = 105):
     if leftJustify:
@@ -31,7 +31,9 @@ def parseTranscript(inputLines, outputFile, justify = True, length = 105):
         if len(line) > 0:
             if line[0] == " ":
                 line = line[1:]
-        outputFile.write(line.replace("  ", " "))     
+        line = line.replace(" >>", ">>")
+        line.replace("  ", " ")
+        outputFile.write(line)
 
 def leftJustify(text, lineLength):
     done = False
@@ -44,7 +46,7 @@ def leftJustify(text, lineLength):
             line += words.pop(0) + " "
             if len(words) == 0:
                 break
-            
+
         output.append(line + "\n")
             
         if len(" ".join(words)) < lineLength:
