@@ -1,0 +1,5 @@
+Lets get started by asking Sergey Brin, the co-founder of Google, what the most important thing is in building 
+a search engine. So what's your take on how to build a search engine? You have built one before, right? 
+Yes, I think the most important thing if you want to build a search engine, I think is to have a really 
+good, fun corpus to start with. In our case we used the world wide web which at the time was significantly 
+smaller than it is today. It was also very new and exciting there were all kinds of unexpected things there. 

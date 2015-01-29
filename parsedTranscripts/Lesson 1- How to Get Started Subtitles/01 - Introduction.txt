@@ -1,0 +1,18 @@
+Welcome to CS101. I'm Dave Evans, I will be your guide on this journey. This course will introduce you 
+to the fundamental ideas in computing and teach you to read and write your own computer programs. We are 
+going to do that in the context of building a web search engine. I'm guessing everyone here has at least 
+used a search engine before. Like Google, DuckDuckGo or even my personal favorite - DaveDaveFind. You type 
+in what you are looking for, and voila - in literally a blink of an eye, about a tenth of a second, back 
+come the results. This might not be enough to make you wise, but it is pretty amazing. A goal of this class 
+is to turn some of the magic of the search engine into something a bit more understandable. Our biggest 
+goal tho is to learn about computer science. Computer science is about how to solve problems, like building 
+a search engine, by breaking them into smaller pieces and then precisely and mechanically describing a 
+sequence of steps that you can use to solve each piece. And those steps can be executed by a computer. 
+For our search engine the three main pieces are: finding data by crawling web pages, building an index 
+to be able to respond quickly to search queries, and ranking pages so that we get the best result for a 
+given query. In this course we will not get into everything that you need to build a search engine as powerful 
+as Google, but we will cover the main ideas and learn a lot about computer science along the way. The first 
+three units will focus on building the web crawler. We will talk more about that soon. Units 4 and 5 will 
+cover how to respond to queries quickly. And unit 6 will get into how to rank results and cover the method 
+Google uses to rank pages, that made it so successful. But first, let's talk about how to build a web crawler 
+that we are going to use to get data for our search engine. 

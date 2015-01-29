@@ -2,10 +2,10 @@ import os
 from zipfile import ZipFile
 
 #Place all .zip files from Udacity in the directory you specify below:
-inputDirectory = "C:/transcripts/"
+inputDirectory = "transcripts/"
 
 #The formatted .txt files from each of the lessons will be saved in the directory you specify below:
-outputDirectory = "C:/parsedTranscripts/"
+outputDirectory = "parsedTranscripts/"
 
 def parseTranscript(inputLines, outputFile, justify = True, length = 105):
     if leftJustify:
